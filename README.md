@@ -1,6 +1,10 @@
 # whatap test env
 
 ## rest test
+### node start
+```shell
+$ npm start
+```
 #### get
 ```shell
 http://localhost:3000/users/get?limit=3
@@ -38,13 +42,11 @@ http://localhost:3000/users/post
 ## socket
 #### http server
 ```shell
-node chat-http.js
+$ node chat-http.js
+url : http://localhost:3033/
 ```
 #### express
 ```shell
-node chat-express.js
-```
-#### express framework (v.4.13.4)
-```shell
-node chat-express_framework.js
+$ node chat-express.js
+url : http://localhost:3033/
 ```

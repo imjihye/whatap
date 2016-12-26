@@ -4,7 +4,7 @@
 	$(document).ready(function(){
 	    var socket = io.connect('http://localhost:3033');
 
-        $('#welcome').text('welcome chat~!')
+        $('#welcome').text('welcome chat~!');
 
         $('#enter').off().on('click', function(e){
 	        socket.emit('join', 
@@ -17,6 +17,7 @@
 
 	        $('#log').hide();
 	        $('#chat').show();
+        	$('#txtappend').append('<dd style="margin:0px;">welcome: ' + $('#user').val() + '</dd>');
 	    });
 
 	    $('#btn').off().on('click', function(e){
@@ -28,6 +29,7 @@
 		        $('#txtappend').append('<dd style="margin:0px;">'  + data.user + ': ' + data.message + '</dd>');
 		    });
 
+	        $('#txtappend').append('<dd style="margin:0px;">'  + $('#user').val() + ': ' + $('#txt').val() + '</dd>');
 		    $('#txt').val('');
 	    });
 

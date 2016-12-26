@@ -16,8 +16,6 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-	// socket.emit('welcome', {message: 'welcome chat.'});
-
 	socket.on('join', function(data){
     	socket.user = data.user;
     	socket.roomname = data.roomname;
@@ -27,12 +25,13 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('send', function(data){
-		io.emit('send message', data);
+		socket.in(socket.roomname).emit('send message', data);
 	});
 
 	socket.on('disconnect', function(){
 		console.log('disconnect');
 		socket.in(socket.roomname).emit('leave', socket.user);
+		socket.leave(socket.roomname);
 	});
 });
 
