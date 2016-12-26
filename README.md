@@ -3,6 +3,7 @@
 ## rest test
 ### node start
 ```shell
+$ npm run db
 $ npm start
 ```
 #### get
