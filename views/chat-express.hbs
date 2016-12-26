@@ -1,36 +1,49 @@
 <!doctype html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>chat</title>
+
+         <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+
         <script src="/socket.io/socket.io.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     </head>
     <body>
         <p id="welcome"></p>
-        <div id="log">
-            user: <input type="text" id="user" value="jh">
+        <div id="log" class="form-group">
+            user: <input type="text" class="form-control" id="user" value="">
             <br/>
-            room name: <input type="text" id="roomname" value="jhroom">
+            room name: <input type="text" class="form-control" id="roomname" value="room" disabled>
             <br/>
-            <input type="button" id="enter" value="go!">
+            <input type="button" class="btn btn-primary" id="enter" value="go!">
         </div>
-
-        <div id="chat" style="display:none">
-            <div style="width:300px; border:1px solid; margin:2px;">
-                <h3>user list</h3>
+        <div id="chat" style="display:none; margin:10px;">
+            <div style="width:300px; margin:2px;">
+                users..
                 <ul id="userlist">
                     
                 </ul>
             </div>
+            <hr />
             <br>
-            <div style="width:300px; border:1px solid; margin:2px;">
+            <div style="width:300px; margin:2px;">
                 <dl id="txtappend">
                     
                 </dl>
             </div>
             <br>
-            <input type="text" style="width:240px;" id="txt">
-            <input type="button" value="send" id="btn">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="txt">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-success" value="send" id="btn">
+                </div>
+            </form>
         </div>
 
 

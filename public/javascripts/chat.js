@@ -7,6 +7,11 @@
         $('#welcome').text('welcome chat~!');
 
         $('#enter').off().on('click', function(e){
+        	if($('#user').val() === '') {
+        		alert('please user name..');
+        		return;
+        	}
+
 	        socket.emit('join', 
 	            {'user': $('#user').val(), 'roomname': $('#roomname').val()}
 	        );
@@ -16,7 +21,6 @@
 	    });
 
 	    $('#btn').off().on('click', function(e){
-
 			socket.emit('send', 
 				{'user': $('#user').val(), 'message': $('#txt').val()}
 			);
