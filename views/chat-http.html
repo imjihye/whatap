@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+    <head>
+        <title>chat</title>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    </head>
+    <body>
+        <p id="welcome"></p>
+        <div id="log">
+            user id: <input type="text" id="userid" value="jh">
+            <br/>
+            room name: <input type="text" id="roomname" value="whatap">
+            <br/>
+            <input type="button" id="enter" value="go!">
+        </div>
+
+        <div id="chat" style="display:none">
+            <div style="width:300px; border:1px solid;" id="txtarea">
+                <dl id="txtappend">
+                    
+                </dl>
+            </div>
+            <br>
+            <input type="text" style="width:240px;" id="txt">
+            <input type="button" value="send" id="btn">
+        </div>
+
+
+        <script>
+            (function($){
+                // $(function(){
+                // });
+                $(document).ready(function(){
+                    var socket = io.connect('http://localhost:3033');
+
+                    socket.on('welcome', function(data){
+                        $('#welcome').text(data.hello)
+
+                        $('#enter').off().on('click', function(e){
+                            socket.emit('join', 
+                                {'userid': $('#userid').val(), 'roomname': $('#roomname').val()}
+                            );
+                            $('#log').hide();
+                            $('#chat').show();
+                        });
+                    });
+                   
+
+
+                    $('#btn').off().on('click', function(e){
+                        socket.emit('message', $('#txt').val());
+                    });
+
+                    socket.on('message', function(data){
+                        $('#txtappend').append('<dd style="margin:0px;">' + data + '</dd>');
+                        $('#txt').val();
+                    });
+                });
+            })(jQuery);
+        </script>
+    </body>
+</html>
