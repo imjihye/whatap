@@ -11,29 +11,36 @@
 	            {'user': $('#user').val(), 'roomname': $('#roomname').val()}
 	        );
 
-		    socket.on('join message', function(data){
-	        	$('#txtappend').append('<dd style="margin:0px;">welcome: ' + data.user + '</dd>');
-		    });
-
 	        $('#log').hide();
 	        $('#chat').show();
-        	$('#txtappend').append('<dd style="margin:0px;">welcome: ' + $('#user').val() + '</dd>');
 	    });
 
 	    $('#btn').off().on('click', function(e){
+
 			socket.emit('send', 
 				{'user': $('#user').val(), 'message': $('#txt').val()}
 			);
 
-		    socket.on('send message', function(data){
-		        $('#txtappend').append('<dd style="margin:0px;">'  + data.user + ': ' + data.message + '</dd>');
-		    });
-
-	        $('#txtappend').append('<dd style="margin:0px;">'  + $('#user').val() + ': ' + $('#txt').val() + '</dd>');
 		    $('#txt').val('');
 	    });
 
+	    socket.on('join message', function(data){
+        	$('#txtappend').append('<dd style="margin:0px;">welcome: ' + data.user + '</dd>');
+    		var html='';
+    		data.userlist.map(function(item){
+        		html += '<li style="margin:0px;">' + item + '</li>';
+    		});
+        	$('#userlist').html(html);
+	    });
+
+	    socket.on('send message', function(data){
+    		console.log('send message')
+
+	        $('#txtappend').append('<dd style="margin:0px;">'  + data.user + ': ' + data.message + '</dd>');
+	    });
+
 		socket.on('leave', function(data){
+			//remove userlist
 			$('#txtappend').append('<dd style="margin:0px;">leave: '  + data + '</dd>');
 		});
     });

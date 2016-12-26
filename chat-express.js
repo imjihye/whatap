@@ -16,21 +16,28 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+	io.userlist = [];
 	socket.on('join', function(data){
+    	io.userlist.push(data.user);
     	socket.user = data.user;
     	socket.roomname = data.roomname;
-
 		socket.join(socket.roomname);
-		socket.in(socket.roomname).emit('join message', data);
+
+    	data.userlist = io.userlist;
+
+		socket.to(socket.roomname).emit('join message', data);
+		socket.emit('join message', data);
 	});
 
 	socket.on('send', function(data){
-		socket.in(socket.roomname).emit('send message', data);
+		socket.to(socket.roomname).emit('send message', data);
+		socket.emit('send message', data);
 	});
 
 	socket.on('disconnect', function(){
 		console.log('disconnect');
-		socket.in(socket.roomname).emit('leave', socket.user);
+
+		socket.to(socket.roomname).emit('leave', socket.user);
 		socket.leave(socket.roomname);
 	});
 });
