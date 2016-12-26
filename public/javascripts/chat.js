@@ -2,7 +2,7 @@
 	// $(function(){
 	// });
 	$(document).ready(function(){
-	    var socket = io.connect('http://localhost:3033');
+	    var socket = io();
 
         $('#welcome').text('welcome chat~!');
 
