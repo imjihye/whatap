@@ -38,6 +38,9 @@
 
         $("#txt").keydown(function(event) {
 	        if (event.which == 13) {
+	        	if($('#txt').val() === '') {
+	        		return false;
+	        	}
 	            socket.emit('send',
 	            	{'user': $('#user').val(), 'message': $('#txt').val()}
             	);
