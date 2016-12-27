@@ -46,6 +46,7 @@ io.on('connection', function(socket){
 			userlist = roomUsers[socket.roomname].filter(function(v, i){
 				return v !== socket.user;
 			});
+			roomUsers[socket.roomname] = userlist;
 		}
 		socket.to(socket.roomname).emit('leave', 
         	{'userlist': userlist, 'user': socket.user}
