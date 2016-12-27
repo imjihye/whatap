@@ -15,8 +15,6 @@
 	            socket.emit('join',
 	            	{'user': $('#user').val(), 'roomname': $('#roomname').val()}
             	);
-		        $('#log').hide();
-		        $('#chat').show();
 	        	event.preventDefault();
 	        }
         });
@@ -30,9 +28,6 @@
 	        socket.emit('join', 
 	            {'user': $('#user').val(), 'roomname': $('#roomname').val()}
 	        );
-
-	        $('#log').hide();
-	        $('#chat').show();
 	    });
 
 
@@ -59,6 +54,13 @@
 	    });
 
 	    socket.on('join message', function(data){
+	    	if(data.error) {
+	    		alert(data.error);
+	    		return;
+	    	}
+
+	        $('#log').hide();
+	        $('#chat').show();
         	$('#txtappend').append('<dd style="margin:0px;">welcome: ' + data.user + '</dd>');
     		var html='';
     		data.userlist.map(function(item){

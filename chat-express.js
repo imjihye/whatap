@@ -19,14 +19,17 @@ var roomUsers = {};
 io.on('connection', function(socket){
 	socket.on('join', function(data){
 		if(data.roomname in roomUsers){
-	    	roomUsers[data.roomname].push(data.user);
+			if(roomUsers[data.roomname].indexOf(data.user) > -1){
+				data.error = 'duplicated error';
+			} else{
+		    	roomUsers[data.roomname].push(data.user);
+		    	socket.user = data.user;
+		    	socket.roomname = data.roomname;
+				socket.join(socket.roomname);
 
-	    	socket.user = data.user;
-	    	socket.roomname = data.roomname;
-			socket.join(socket.roomname);
-
-	    	data.userlist = roomUsers[data.roomname];
-			socket.to(socket.roomname).emit('join message', data);
+		    	data.userlist = roomUsers[data.roomname];
+				socket.to(socket.roomname).emit('join message', data);
+			}
 			socket.emit('join message', data);
 		} else {
 			roomUsers[data.roomname] = [];
