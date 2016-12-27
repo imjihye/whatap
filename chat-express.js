@@ -15,16 +15,18 @@ app.get('/', function(req, res){
 	res.render('chat-express.hbs');
 });
 
+
+
+var userlist = [];
+
 io.on('connection', function(socket){
-	io.userlist = [];
 	socket.on('join', function(data){
-    	io.userlist.push(data.user);
+    	userlist.push(data.user);
     	socket.user = data.user;
     	socket.roomname = data.roomname;
 		socket.join(socket.roomname);
 
-    	data.userlist = io.userlist;
-
+    	data.userlist = userlist;
 		socket.to(socket.roomname).emit('join message', data);
 		socket.emit('join message', data);
 	});
@@ -36,8 +38,14 @@ io.on('connection', function(socket){
 
 	socket.on('disconnect', function(){
 		console.log('disconnect');
+		
+		userlist = userlist.filter(function(v, i){
+			return v !== socket.user;
+		});
 
-		socket.to(socket.roomname).emit('leave', socket.user);
+		socket.to(socket.roomname).emit('leave', 
+        	{'userlist': userlist, 'user': socket.user}
+		);
 		socket.leave(socket.roomname);
 	});
 });

@@ -13,40 +13,40 @@
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     </head>
     <body>
-        <p id="welcome"></p>
-        <div id="log" class="form-group">
-            user: <input type="text" class="form-control" id="user" value="">
-            <br/>
-            room name: <input type="text" class="form-control" id="roomname" value="room" disabled>
-            <br/>
-            <input type="button" class="btn btn-primary" id="enter" value="go!">
-        </div>
-        <div id="chat" style="display:none; margin:10px;">
-            <div style="width:300px; margin:2px;">
-                users..
-                <ul id="userlist">
-                    
-                </ul>
+        <div class="col-md-4">
+            <p id="welcome"></p>
+            <div id="log" class="form-group">
+                user: <input type="text" class="form-control" id="user" value="">
+                <br/>
+                room name: <input type="text" class="form-control" id="roomname" value="room" disabled>
+                <br/>
+                <input type="button" class="btn btn-primary" id="enter" value="go!">
             </div>
-            <hr />
-            <br>
-            <div style="width:300px; margin:2px;">
-                <dl id="txtappend">
-                    
-                </dl>
+            <div id="chat" style="display:none; margin:10px;">
+                <div style="width:300px; margin:2px;">
+                    users..
+                    <ul id="userlist">
+                        
+                    </ul>
+                </div>
+                <hr />
+                <br>
+                <div style="width:300px; margin:2px;">
+                    <dl id="txtappend">
+                        
+                    </dl>
+                </div>
+                <br>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="txt">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-success" value="send" id="btn">
+                    </div>
+                </form>
             </div>
-            <br>
-            <form class="form-inline">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="txt">
-                </div>
-                <div class="form-group">
-                    <input type="button" class="btn btn-success" value="send" id="btn">
-                </div>
-            </form>
         </div>
-
-
         <script src="/javascripts/chat.js"></script>
     </body>
 </html>
