@@ -5,7 +5,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var path = require('path');
 
-server.listen(3033, function(){
+server.listen(3002, function(){
 	console.log('Server listening at port %d', server.address().port);
 });
 

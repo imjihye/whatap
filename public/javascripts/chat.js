@@ -41,11 +41,16 @@
             	);
 	            $('#txt').val('');
 	        	event.preventDefault();
-
 	        }
         });
 
 	    $('#btn').off().on('click', function(e){
+	    	if (event.which == 13) {
+	        	if($('#txt').val() === '') {
+	        		return false;
+	        	}
+	        }
+	        
 			socket.emit('send', 
 				{'user': $('#user').val(), 'message': $('#txt').val()}
 			);
